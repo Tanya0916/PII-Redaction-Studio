@@ -170,7 +170,30 @@ Overall F1-Score:  93.88%
 
 ---
 
-## 📁 Repository File Structure
+## 🌐 Interactive Web UI & Cloud Deployment
+
+The repository includes a modern web interface built with **Streamlit** ([`app.py`](file:///c:/Users/HP/OneDrive/Desktop/ASSIGNMENT/app.py)):
+
+- **Document Redaction**: Drag & drop any `.docx` file or 1-click test with the included *Red Herring Prospectus.docx*.
+- **Download Artifacts**: 1-click download for redacted DOCX, `mapping.json`, and audit logs.
+- **Live Text Inspector**: Interactive real-time test bench for scanning and anonymizing raw text snippets.
+- **Benchmark Evaluation**: Dynamic visualization of the precision, recall, and F1-score evaluation matrix.
+
+### Local Web UI Execution
+```bash
+streamlit run app.py
+```
+
+### 1-Click Deploy to Render / Cloud
+1. Push this repository to GitHub.
+2. In [Render Dashboard](https://dashboard.render.com/), click **New +** → **Blueprint** (or **Web Service**).
+3. Connect your repository. Render automatically reads [`render.yaml`](file:///c:/Users/HP/OneDrive/Desktop/ASSIGNMENT/render.yaml):
+   - **Environment**: Python 3.11
+   - **Build Command**: `pip install -r requirements.txt && python -m spacy download en_core_web_sm`
+   - **Start Command**: `streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.enableCORS false --server.enableXsrfProtection false`
+4. Click **Deploy** to get your public `https://<your-service>.onrender.com` URL.
+
+---
 
 ```
 project/
