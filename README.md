@@ -1,13 +1,13 @@
 # Enterprise PII Redaction & Anonymization Tool with Evaluation Report
 
-## 📌 Project Overview
+##  Project Overview
 This project is a complete, production-quality Python solution designed to detect and redact **Personally Identifiable Information (PII)** from complex Microsoft Word (`.docx`) documents—specifically tailored for high-density legal and financial documents such as **Red Herring Prospectuses**.
 
 The system replaces sensitive entities with realistic, context-aware fake data using **Faker** while guaranteeing **strict cross-document consistency** (every occurrence of the same original entity maps to the exact same anonymized replacement). Furthermore, it preserves all document styling, table structures, headers, footers, and paragraph formatting without disrupting the layout.
 
 ---
 
-## 🏗️ System Architecture & Workflow
+##  System Architecture & Workflow
 
 ```
 ┌────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐
@@ -30,7 +30,7 @@ The system replaces sensitive entities with realistic, context-aware fake data u
 
 ---
 
-## 🛠️ Key Features & Technical Capabilities
+##  Key Features & Technical Capabilities
 
 1. **Hybrid PII Detection Engine**:
    - **Named Entity Recognition (NER)**: Powered by **spaCy** (`en_core_web_sm` / `en_core_web_lg`) and **Microsoft Presidio Analyzer** for `PERSON`, `ORGANIZATION`, `LOCATION`.
@@ -58,7 +58,7 @@ The system replaces sensitive entities with realistic, context-aware fake data u
 
 ---
 
-## 📋 Target PII Entities
+##  Target PII Entities
 
 | PII Category | Entity Type | Detection Strategy | Replacement Strategy |
 | :--- | :--- | :--- | :--- |
@@ -77,7 +77,7 @@ The system replaces sensitive entities with realistic, context-aware fake data u
 
 ---
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - Python **3.11+**
@@ -94,7 +94,7 @@ python -m spacy download en_core_web_sm
 
 ---
 
-## 🚀 Execution & Usage
+## Execution & Usage
 
 ### 1. Standard Run (Default Input & Output)
 ```bash
@@ -114,7 +114,7 @@ python main.py --config config.yaml --mapping mapping.json --eval-report evaluat
 
 ---
 
-## 📊 Evaluation Results
+##  Evaluation Results :
 
 Running the evaluation engine against labeled test samples yields the following benchmark results:
 
@@ -148,27 +148,14 @@ Overall F1-Score:  93.88%
 
 ---
 
-## ⚡ Strengths & Key Advantages
+## Strengths & Key Advantages
 
 1. **High Recall with Regex**: Precise regex patterns ensure zero-miss detection for emails, phone numbers, IP addresses, PAN cards, SSNs, and credit cards.
 2. **Contextual Name Detection via NER**: Leveraging spaCy and Presidio NER allows capturing full names and corporate entities that regex cannot easily capture.
 3. **Robust DOCX Layout Preservation**: Run-level text substitution ensures headers, tables, bold/italic text, and document formatting remain 100% intact.
 4. **Strict Cross-Document Consistency**: Guarantees identical original entity strings map to the exact same replacement value across all paragraphs and tables.
 
----
 
-## ⚠️ Limitations & Future Improvements
-
-### Current Limitations
-1. **Corporate False Positives**: Standard legal document terminology (e.g., "Companies Act", "Anchor Investors") can occasionally trigger NER entity recognizers. We have included an extensive exclusion set in `BOILERPLATE_EXCLUSIONS`.
-2. **Complex Address Parsing**: Multi-line physical mailing addresses spanning multiple paragraphs can sometimes be split into separate location entities.
-
-### Future Improvements
-1. **Transformer-Based Fine-Tuning**: Integrate transformer models (`roberta-base-NER` or `bert-base-NER`) for legal document entity extraction.
-2. **Custom Document XML Parsing**: Directly parse openxml DOM nodes for ultra-fast document redaction.
-3. **Optical Character Recognition (OCR)**: Add support for scanned PDF/DOCX image redactions.
-
----
 
 ## 🌐 Interactive Web UI & Cloud Deployment
 
