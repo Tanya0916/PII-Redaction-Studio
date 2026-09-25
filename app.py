@@ -220,9 +220,11 @@ def main():
             c1, c2, c3 = st.columns(3)
             overall_row = df_eval[df_eval["Entity"] == "OVERALL"]
             if not overall_row.empty:
+                f1_col = "F1-Score" if "F1-Score" in overall_row.columns else ("F1" if "F1" in overall_row.columns else None)
                 c1.metric("Overall Precision", overall_row["Precision"].values[0])
                 c2.metric("Overall Recall", overall_row["Recall"].values[0])
-                c3.metric("Overall F1-Score", overall_row["F1-Score"].values[0])
+                if f1_col:
+                    c3.metric("Overall F1-Score", overall_row[f1_col].values[0])
             
             st.dataframe(df_eval, use_container_width=True)
 
