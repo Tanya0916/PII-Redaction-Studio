@@ -1,0 +1,64 @@
+# PII Redaction Configuration
+
+pipeline:
+  spacy_model: "en_core_web_sm"
+  confidence_threshold: 0.45
+  enable_presidio: true
+  enable_regex: true
+
+pii_types:
+  PERSON:
+    enabled: true
+    label: "PERSON"
+  ORGANIZATION:
+    enabled: true
+    label: "ORGANIZATION"
+  EMAIL:
+    enabled: true
+    label: "EMAIL"
+  PHONE:
+    enabled: true
+    label: "PHONE"
+  DATE_OF_BIRTH:
+    enabled: true
+    label: "DATE_OF_BIRTH"
+  CREDIT_CARD:
+    enabled: true
+    label: "CREDIT_CARD"
+  BANK_ACCOUNT:
+    enabled: true
+    label: "BANK_ACCOUNT"
+  SSN:
+    enabled: true
+    label: "SSN"
+  PAN:
+    enabled: true
+    label: "PAN"
+  AADHAAR:
+    enabled: true
+    label: "AADHAAR"
+  LOCATION:
+    enabled: true
+    label: "LOCATION"
+  IP_ADDRESS:
+    enabled: true
+    label: "IP_ADDRESS"
+
+regex_patterns:
+  EMAIL: '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+  PHONE: '(?:\+91[- ]?)?[6-9]\d{9}|\b0\d{2,4}[- ]?\d{6,8}\b|\b\d{3}[-.]?\d{3}[-.]?\d{4}\b'
+  IP_ADDRESS: '\b(?:\d{1,3}\.){3}\d{1,3}\b'
+  CREDIT_CARD: '\b(?:\d[ -]*?){13,16}\b'
+  SSN: '\b\d{3}-\d{2}-\d{4}\b'
+  DATE_OF_BIRTH: '\b(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}|\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})\b'
+  PAN: '\b[A-Z]{5}[0-9]{4}[A-Z]{1}\b'
+  AADHAAR: '\b[2-9]\d{3}[ -]\d{4}[ -]\d{4}\b'
+  BANK_ACCOUNT: '\b[0-9]{9,18}\b'
+
+defaults:
+  input_docx: "input/Red Herring Prospectus.docx"
+  output_docx: "output/redacted.docx"
+  mapping_json: "mapping.json"
+  eval_report_csv: "evaluation_report.csv"
+  metrics_txt: "metrics.txt"
+  log_file: "redaction.log"
